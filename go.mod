@@ -1,8 +1,8 @@
-module github.com/portofportland/terraform-provider-windns
+module terraform-provider-pshdns
 
-go 1.13
+go 1.15
 
 require (
-	github.com/hashicorp/terraform v0.12.29
-	github.com/portofportland/goPSRemoting v0.2.0
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.3.0
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 )

@@ -1,12 +1,16 @@
 package main
 
 import (
-	"github.com/hashicorp/terraform/plugin"
-	"github.com/portofportland/terraform-provider-windns/windns"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+
+	"terraform-provider-pshdns/pshdns"
 )
 
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
-		ProviderFunc: windns.Provider,
+		ProviderFunc: func() *schema.Provider {
+			return pshdns.Provider()
+		},
 	})
 }
