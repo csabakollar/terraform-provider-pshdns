@@ -50,6 +50,17 @@ func runRemoteCommand(c *clientInfo, cmd string) ([]byte, error) {
 	}
 	defer session.Close()
 
+	modes := ssh.TerminalModes{
+		ssh.ECHO:          0,     // disable echoing
+		ssh.TTY_OP_ISPEED: 14400, // input speed = 14.4kbaud
+		ssh.TTY_OP_OSPEED: 14400, // output speed = 14.4kbaud
+	}
+
+	err = session.RequestPty("xterm", 80, 40, modes)
+	if err != nil {
+		return []byte{}, err
+	}
+
 	output, err := session.Output(cmd)
 	if err != nil {
 		return output, fmt.Errorf("failed to execute command '%s' on server: %v", cmd, err)
