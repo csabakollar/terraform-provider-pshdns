@@ -23,26 +23,26 @@ func Provider() *schema.Provider {
 			},
 			"password": &schema.Schema{
 				Type:        schema.TypeString,
-				Optional:    true,
+				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PSH_PASSWORD", nil),
 				Description: "The password to connect to AD.",
 			},
 			"ssh_server": &schema.Schema{
 				Type:        schema.TypeString,
-				Optional:    true,
+				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("PSH_SSH_SERVER", nil),
 				Description: "The SSH server to connect to.",
 			},
-			"ssh_server_port": &schema.Schema{
-				Type:        schema.TypeInt,
+			"ssh_port": &schema.Schema{
+				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("PSH_SSH_SERVER_PORT", 22),
+				DefaultFunc: schema.EnvDefaultFunc("PSH_SSH_SERVER_PORT", "22"),
 				Description: "The SSH server port to connect to.",
 			},
 			"dns_server": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("PSH_DNS_SERVER", nil),
+				DefaultFunc: schema.EnvDefaultFunc("PSH_DNS_SERVER", ""),
 				Description: "The DNS server where the zone is hosted.",
 			},
 		},
@@ -68,7 +68,7 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 	username := d.Get("username").(string)
 	password := d.Get("password").(string)
 	sshServer := d.Get("ssh_server").(string)
-	sshPort := d.Get("ssh_server_port").(string)
+	sshPort := d.Get("ssh_port").(string)
 	dnsServer := d.Get("dns_server").(string)
 
 	if username == "" || password == "" || sshServer == "" {

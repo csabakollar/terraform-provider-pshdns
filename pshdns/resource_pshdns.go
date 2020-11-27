@@ -118,9 +118,9 @@ func resourcePshDNSRecordCreate(ctx context.Context, d *schema.ResourceData, m i
 	zoneName := d.Get("zone_name").(string)
 	recordType := d.Get("record_type").(string)
 	recordName := d.Get("record_name").(string)
-	ipv4address := d.Get("ipv4address").(string)
-	hostnamealias := d.Get("hostnamealias").(string)
-	ptrdomainname := d.Get("ptrdomainname").(string)
+	ipv4address := d.Get("ipv4_address").(string)
+	hostnamealias := d.Get("hostname_alias").(string)
+	ptrdomainname := d.Get("ptr_domainname").(string)
 
 	var id string = zoneName + "_" + recordName + "_" + recordType
 
@@ -157,11 +157,11 @@ func resourcePshDNSRecordCreate(ctx context.Context, d *schema.ResourceData, m i
 		psCommand = psCommand + " -ComputerName " + client.dnsServer
 	}
 
-	out, err := runRemoteCommand(client, psCommand)
+	_, err = runRemoteCommand(client, psCommand)
 	if err != nil {
 		return diag.FromErr(err)
 	}
-	log.Println(out)
+	// log.Println(out)
 	d.SetId(id)
 
 	file.Close()

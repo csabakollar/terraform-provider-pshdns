@@ -11,6 +11,7 @@ provider "pshdns" {
   username   = "root"
   password   = "qq"
   ssh_server = "localhost"
+  ssh_port   = "3333"
 }
 
 resource "pshdns" "cname" {
