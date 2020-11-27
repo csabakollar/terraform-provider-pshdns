@@ -154,7 +154,7 @@ func resourcePshDNSRecordCreate(ctx context.Context, d *schema.ResourceData, m i
 	}
 
 	if client.dnsServer != "" {
-		psCommand = psCommand + "-ComputerName " + client.dnsServer
+		psCommand = psCommand + " -ComputerName " + client.dnsServer
 	}
 
 	out, err := runRemoteCommand(client, psCommand)
@@ -183,7 +183,7 @@ func resourcePshDNSRecordRead(ctx context.Context, d *schema.ResourceData, m int
 	psCommand := "try { $record = Get-DnsServerResourceRecord -ZoneName " + zoneName + " -RRType " + recordType + " -Name " + recordName + " -ErrorAction Stop } catch { $record = '''' }; if ($record) { write-host 'RECORD_FOUND' }"
 
 	if client.dnsServer != "" {
-		psCommand = psCommand + "-ComputerName " + client.dnsServer
+		psCommand = psCommand + " -ComputerName " + client.dnsServer
 	}
 
 	_, err := runRemoteCommand(client, psCommand)
@@ -223,7 +223,7 @@ func resourcePshDNSRecordDelete(ctx context.Context, d *schema.ResourceData, m i
 	psCommand := "Remove-DNSServerResourceRecord -ZoneName " + zoneName + " -RRType " + recordType + " -Name " + recordName + " -Confirm:$false -Force"
 
 	if client.dnsServer != "" {
-		psCommand = psCommand + "-ComputerName " + client.dnsServer
+		psCommand = psCommand + " -ComputerName " + client.dnsServer
 	}
 
 	out, err := runRemoteCommand(client, psCommand)
