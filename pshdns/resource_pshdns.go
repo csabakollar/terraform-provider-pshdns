@@ -145,7 +145,7 @@ func resourcePshDNSRecordCreate(ctx context.Context, d *schema.ResourceData, m i
 		if ipv4address == "" {
 			return diag.FromErr(errors.New("Must provide ipv4address if record_type is 'A'"))
 		}
-		psCommand = "Add-DNSServerResourceRecord -ZoneName " + zoneName + " -" + recordType + " -Name " + recordName + " -IPv4Address " + ipv4address
+		psCommand = "Add-DNSServerResourceRecordA -ZoneName " + zoneName + " -Name " + recordName + " -IPv4Address " + ipv4address
 	case "CNAME":
 		if hostnamealias == "" {
 			return diag.FromErr(errors.New("Must provide hostnamealias if record_type is 'CNAME'"))
