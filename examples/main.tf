@@ -1,8 +1,7 @@
 terraform {
   required_providers {
     pshdns = {
-      versions = ["0.2"]
-      source   = "dopsdigital.com/infra/pshdns"
+      source   = "csabakollar/pshdns"
     }
   }
 }

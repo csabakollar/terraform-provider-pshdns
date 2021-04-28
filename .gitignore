@@ -6,3 +6,4 @@ terraform-provider-windns
 .terraform
 crash.log
 terraform.tfstate*
+.*DS_Store

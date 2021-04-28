@@ -1,6 +1,6 @@
 TEST?=$$(go list ./... | grep -v 'vendor')
-HOSTNAME=dopsdigital.com
-NAMESPACE=infra
+HOSTNAME=registry.terraform.io
+NAMESPACE=csabakollar
 NAME=pshdns
 BINARY=terraform-provider-${NAME}
 VERSION=0.2
